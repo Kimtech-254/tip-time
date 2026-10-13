@@ -41,6 +41,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tiptime.ui.theme.TipTimeTheme
+import org.jetbrains.annotations.VisibleForTesting
 import java.text.NumberFormat
 
 class MainActivity : ComponentActivity() {
@@ -86,7 +87,7 @@ fun TipTimeLayout() {
         )
         EditNumberField(
             label = R.string.bill_amount,
-            leadingIcon = R.drawable.money,
+            leadingIcon = R.drawable.money_ic,
             keyboardOptions = KeyboardOptions.Default.copy(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Next
@@ -163,10 +164,10 @@ fun RoundTheTipRow(
         )
     }
 }
-private fun calculateTip(
-    amount: Double,
-    tipPercent: Double = 15.0,
-    roundUp: Boolean
+@VisibleForTesting
+internal fun calculateTip(amount: Double,
+                          tipPercent: Double = 15.0,
+                          roundUp: Boolean
 ): String {
     var tip = tipPercent / 100 * amount
     if (roundUp) {
